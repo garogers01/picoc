@@ -1,7 +1,7 @@
 /* picoc main program - this varies depending on your operating system and
  * how you're using picoc */
 /* platform-dependent code for running programs is in this file */
-#if defined(UNIX_HOST) || defined(WIN32)
+#if defined(USE_STDIO)
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,7 +12,7 @@
 #include "picoc.h"
 
 
-#if defined(UNIX_HOST) || defined(WIN32)
+#if defined(INCLUDE_LICENSE)
 #include "LICENSE.h"
 
 /* Override via STACKSIZE environment variable */

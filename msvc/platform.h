@@ -2,9 +2,12 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
-/* There wasn't anything in the original, so nothing here.
-   We need a file to make the new build system happy.
-   But I can't test it.
-*/
+/* Sorry, but I can't test this.*/
+
+#define ADD_UNISTD		  // Script files include unistd.h automatically.
+#define USE_STDIO	     // For interpret I/O
+#define INCLUDE_LICENSE  // For -c option
+#define HAVE_SETJUMP
+
 
 #endif /* PLATFORM_H */

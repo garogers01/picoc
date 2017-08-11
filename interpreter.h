@@ -478,7 +478,7 @@ struct Picoc_Struct {
     const char *VersionString;
 
     /* exit longjump buffer */
-#if defined(UNIX_HOST) || defined(WIN32)
+#if defined(HAVE_SETJUMP)
     jmp_buf PicocExitBuf;
 #endif
 
