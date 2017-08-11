@@ -1,6 +1,6 @@
 /* all platform-specific includes and defines go in this file */
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#ifndef SYSTEM_H
+#define SYSTEM_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,27 +14,8 @@
 #include <math.h>
 #include <stdbool.h>
 
-/* host platform includes */
-#ifdef UNIX_HOST
-# include <stdint.h>
-# include <unistd.h>
-#elif defined(WIN32) /*(predefined on MSVC)*/
-#else
-# error ***** A platform must be explicitly defined! *****
-#endif
-
-
-/* configurable options */
-/* select your host type (or do it in the Makefile):
- #define UNIX_HOST
- #define DEBUGGER
- #define USE_READLINE (defined by default for UNIX_HOST)
- */
-#define USE_READLINE
-
-#if defined(WIN32) /*(predefined on MSVC)*/
-#undef USE_READLINE
-#endif
+/* Get host specific includes */
+#include "platform.h"
 
 /* undocumented, but probably useful */
 #undef DEBUG_HEAP
@@ -68,4 +49,4 @@
 
 extern jmp_buf ExitBuf;
 
-#endif /* PLATFORM_H */
+#endif /* SYSTEM_H */

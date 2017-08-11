@@ -143,23 +143,36 @@ On Windows, use the MSVC++ sln file in the msvc/picoc folder.
 
 # Porting PicoC
 
-platform.h is where you select your platform type and specify the includes
-etc. for your platform.
+The platform is selected in the Makefile. You can either set HOST in
+the Makefile, or set it on the command line when you invoke make. It
+will be prepended to the string '_HOST' and defined for the
+compilation. As such, it should be upper case. It's there in case you
+have to introduce platform dependencies elsewhere in the code. This is
+frowned upon, though.
 
-platform_XXX.c contains support functions so the compiler can work on
-your platform, such as how to write characters to the console etc..
+The platform specific code goes in a directory whose name is the value
+of HOST, though in lower case. That directory includes the following
+files:
 
-platform_library.c contains your library of functions you want to make
-available to user programs.
+ - host.mk, which MUST define CC, and can define anything else it
+   needs. The only other value of interest is SRCS, should you need
+   sources other than the ones mentioned here. It will be included
+   in the Makefile.
+ - library.c contains your library of functions you want to make
+   available to user programs.
+ - platform.c contains support functions so the compiler can work on
+   your platform, such as how to write characters to the console etc.
+ - platform.h is where you  specify the includes etc. for your platform.
+
 
 There's also a clibrary.c which contains user library functions like
 printf() which are platform-independent.
 
-Porting the system will involve setting up suitable includes and defines
-in platform.h, writing some I/O routines in platform_XXX.c, putting
-whatever user functions you want in platform_library.c and then changing
-the main program in picoc.c to whatever you need to do to get programs
-into the system.
+Porting the system will involve creating the appropriate directory,
+setting up suitable includes and defines in platform.h, writing some
+I/O routines in platform.c, putting whatever user functions you want
+in library.c, creating host.mk and then changing the main program in
+picoc.c to whatever you need to do to get programs into the system.
 
 platform.h is set to UNIX_HOST by default so tests can be easily run on
 a UNIX system. You'll need to specify your own host setup dependent on
