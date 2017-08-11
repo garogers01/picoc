@@ -1,10 +1,6 @@
 HOST?=UNIX
 HOST_DIR?= $(shell echo $(HOST) | tr A-Z a-z)
 
-# Use $ xxd -i ./LICENSE > LICENSE.h
-# to create the license info file. Should be signed char, add a
-# null character to the end of the array.
-
 include $(HOST_DIR)/host.mk
 
 # -O3 -g
@@ -43,7 +39,10 @@ count:
 
 .PHONY: clibrary.c
 
-picoc.o: picoc.c picoc.h
+LICENSE.h: LICENSE
+	xxd -i LICENSE | sed -e 1s/LICENSE/__LICENSE/ -e 's/}/,0x00}/' -e /LICENSE_len/d > LICENSE.h
+
+picoc.o: picoc.c picoc.h LICENSE.h
 table.o: table.c interpreter.h system.h $(HOST_DIR)/platform.h
 lex.o: lex.c interpreter.h system.h $(HOST_DIR)/platform.h
 parse.o: parse.c picoc.h interpreter.h system.h $(HOST_DIR)/platform.h
