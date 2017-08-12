@@ -10,6 +10,7 @@ void IncludeInit(Picoc *pc)
 {
     IncludeRegister(pc, "ctype.h", NULL, &StdCtypeFunctions[0], NULL);
     IncludeRegister(pc, "errno.h", &StdErrnoSetupFunc, NULL, NULL);
+    IncludeRegister(pc, "limits.h", &StdLimitsSetupFunc, NULL, NULL);
 # ifndef NO_MATH
     IncludeRegister(pc, "math.h", &MathSetupFunc, &MathFunctions[0], NULL);
 # endif

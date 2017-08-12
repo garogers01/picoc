@@ -14,7 +14,7 @@ SRCS	+= picoc.c table.c lex.c parse.c expression.c heap.c type.c \
 	variable.c clibrary.c platform.c include.c debug.c \
 	cstdlib/stdio.c cstdlib/math.c cstdlib/string.c cstdlib/stdlib.c \
 	cstdlib/time.c cstdlib/errno.c cstdlib/ctype.c cstdlib/stdbool.c \
-	cstdlib/stdint.c \
+	cstdlib/stdint.c cstdlib/limits.c \
 	$(HOST_DIR)/platform.c $(HOST_DIR)/library.c
 OBJS	:= $(SRCS:%.c=%.o)
 
@@ -66,3 +66,5 @@ cstdlib/errno.o: cstdlib/errno.c interpreter.h system.h $(HOST_DIR)/platform.h
 cstdlib/ctype.o: cstdlib/ctype.c interpreter.h system.h $(HOST_DIR)/platform.h
 cstdlib/stdbool.o: cstdlib/stdbool.c interpreter.h system.h $(HOST_DIR)/platform.h
 cstdlib/unistd.o: cstdlib/unistd.c interpreter.h system.h $(HOST_DIR)/platform.h
+cstdlib/limits.o: cstdlib/limits.c interpreter.h system.h $(HOST_DIR)/platform.h
+cstdlib/stdint.o: cstdlib/stdint.c interpreter.h system.h picoc.h $(HOST_DIR)/platform.h

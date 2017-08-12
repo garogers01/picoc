@@ -698,6 +698,9 @@ extern void StdTimeSetupFunc(Picoc *pc);
 /* errno.c */
 extern void StdErrnoSetupFunc(Picoc *pc);
 
+/* limits.c */
+extern void StdLimitsSetupFunc(Picoc *pc);
+
 /* ctype.c */
 extern struct LibraryFunction StdCtypeFunctions[];
 
