@@ -143,47 +143,65 @@ On Windows, use the MSVC++ sln file in the msvc/picoc folder.
 
 # Porting PicoC
 
-The platform is selected in the Makefile. You can either set HOST in
-the Makefile, or set it on the command line when you invoke make. It
-will be prepended to the string '_HOST' and defined for the
-compilation. As such, it should be upper case. It's there in case you
-have to introduce platform dependencies elsewhere in the code. This is
-frowned upon, though.
+The Makefile deals with building for a specific platform. You can
+either set HOST in the Makefile, or set it on the command line when
+you invoke make. It defaults to UNIX.  $(HOST)_HOST will be defined on
+the command line. As such, HOST should be upper case. It's there in
+case you have to introduce platform dependencies elsewhere in the
+code. This is frowned upon, though.
 
 The platform specific code goes in a directory whose name is the value
-of HOST, though in lower case. That directory includes the following
-files:
+of HOST in lower case. That directory includes the following files:
 
- - host.mk, which MUST define CC, and can define anything else it
-   needs. The only other value of interest is SRCS, should you need
-   sources other than the ones mentioned here. It will be included
-   in the Makefile.
+ - host.mk, which MUST define CC and TARGET, and can define anything
+   else it needs. Details below.
+ - platform.c contains support functions so the compiler can work on
+   your platform, such as how to write characters to the console.
+ - platform.h is where you  specify the includes etc. for your platform.
  - library.c contains your library of functions you want to make
    available to user programs.
- - platform.c contains support functions so the compiler can work on
-   your platform, such as how to write characters to the console etc.
- - platform.h is where you  specify the includes etc. for your platform.
-
-
-There's also a clibrary.c which contains user library functions like
-printf() which are platform-independent.
 
 Porting the system will involve creating the appropriate directory,
-setting up suitable includes and defines in platform.h, writing some
-I/O routines in platform.c, putting whatever user functions you want
-in library.c, creating host.mk and then changing the main program in
-picoc.c to whatever you need to do to get programs into the system.
+then creating the three files it needs. They are listed in the
+recommended creation order.
 
-platform.h is set to UNIX_HOST by default so tests can be easily run on
-a UNIX system. You'll need to specify your own host setup dependent on
-your target platform.
+The host.mk files can define:
+ - TARGET - the executable file to be buile, or firmware image for
+   embedded systems. This one is required.
+ - CC - the C compiler to use if not the build hosts CC.
+ - STDLIB - Libraries to include from the cstdlib directory. If not
+   defined, you get all of them. $(EMBEDDED) excludes the POSIX libraries.
+ - SRCS - source-specifc host files other than library.c and platform.c
+ - LIBS - Extra libraries to link against.
+ - CFLAGS & LDFLAGS  - flags to be added when compiling and linking.
+
+platform.c needs to define:
+ - void PlatformInit(Picoc *pc) - initialization code.
+ - void PlatformCleanup(Picoc *pc) - undoes PlatformInit.
+ - char *PlatformGetLine(char *, int, const char *prompt) - used
+   to read a line in the REPL.
+ - char PlatformGetCharacter(void) - read character for the REPL.
+ - void PlatformPutc(unsigned char, union OutputStreamInfo *) - write
+   a character to the REPL. The second argument can be ignored.
+ - char *PlatformReadFile(Picoc *, const char *) - read in afiles text.
+ - void PicocPlatformScanFile - load a file into the interpreter.
+ - void PlatformExit(Picoc *, int) - leave the interpreter.
+
+In addtions, if you have NO_STDIO defined, you'll need to define
+PrintCh(char, IOFILE *), PrintStr(char *, IOFILE *),
+PrintSimpleInt(long Num, IOFILE *), and BasicIOInit(Picoc *).
 
 
-# Copyright
+platform.h has platform-specific includes, and defines to enable
+features. In particular, critical libraries in cstdlib can be disabled
+by defining NO_XXXX for library XXX. NO_FP will build an interpreter
+with no floating point types, and implies NO_MATH. If you define
+USE_STDIO (and haven't defined NO_STDIO), you'll get a default main
+function suitable for use with a command line. If you don't use that,
+you'll have to provide your own.
 
-PicoC is published under the "New BSD License", see the LICENSE file.
-
-
+library.c adds platform-specific libraries to the interpreter as
+described in the next section.
 
 # Adding native C functions
 
@@ -197,7 +215,7 @@ of your hardware.
 Your picoc distribution contains two files which are used to define library
 functions for your system. If your system is called "foobar" you'll be using:
 
-* library_foobar.c - this is where the foobar-specific library functions go
+* foobar/library.c - this is where the foobar-specific library functions go
 * clibrary.c - this is where standard C library functions like printf() are defined
 
 We'll start by defining a simple function in library_foobar.c. We need to do two things:
@@ -206,7 +224,7 @@ We'll start by defining a simple function in library_foobar.c. We need to do two
 * define the native C implementation of the function
 
 ## The prototype list
-Each of the library_XXX.c files defines a list of picoc prototypes for each of
+Each of the XXX/library.c files defines a list of picoc prototypes for each of
 the functions it defines. For example:
 
 ```C
@@ -512,3 +530,8 @@ Some discussion on this topic:
 
 * http://www.cprogramming.com/tutorial/goto.html
 * http://kerneltrap.org/node/553/2131
+
+# Copyright
+
+PicoC is published under the "New BSD License", see the LICENSE file.
+
