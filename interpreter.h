@@ -478,9 +478,7 @@ struct Picoc_Struct {
     const char *VersionString;
 
     /* exit longjump buffer */
-#if defined(HAVE_SETJUMP)
     jmp_buf PicocExitBuf;
-#endif
 
     /* string table */
     struct Table StringTable;

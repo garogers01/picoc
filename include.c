@@ -14,13 +14,12 @@ void IncludeInit(Picoc *pc)
     IncludeRegister(pc, "math.h", &MathSetupFunc, &MathFunctions[0], NULL);
 # endif
     IncludeRegister(pc, "stdbool.h", &StdboolSetupFunc, NULL, StdboolDefs);
+# ifndef NO_STDIO
     IncludeRegister(pc, "stdio.h", &StdioSetupFunc, &StdioFunctions[0], StdioDefs);
+# endif
     IncludeRegister(pc, "stdlib.h", &StdlibSetupFunc, &StdlibFunctions[0], NULL);
     IncludeRegister(pc, "string.h", &StringSetupFunc, &StringFunctions[0], NULL);
     IncludeRegister(pc, "time.h", &StdTimeSetupFunc, &StdTimeFunctions[0], StdTimeDefs);
-# if defined(ADD_UNISTD)
-    IncludeRegister(pc, "unistd.h", &UnistdSetupFunc, &UnistdFunctions[0], UnistdDefs);
-# endif
 }
 
 /* clean up space used by the include system */

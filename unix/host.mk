@@ -1,2 +1,2 @@
-CC=gcc
+TARGET	= picoc
 LIBS=-lm -lreadline

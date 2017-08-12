@@ -14,6 +14,7 @@
 
 #if defined(INCLUDE_LICENSE)
 #include "LICENSE.h"
+#endif
 
 /* Override via STACKSIZE environment variable */
 #define PICOC_STACK_SIZE (128000*4)
@@ -31,15 +32,19 @@ int main(int argc, char **argv)
                "> picoc <file1.c>... [- <arg1>...]    : run a program, calls main() as the entry point\n"
                "> picoc -s <file1.c>... [- <arg1>...] : run a script, runs the program without calling main()\n"
                "> picoc -i                            : interactive mode, Ctrl+d to exit\n"
+#if defined(INCLUDE_LICENSE)
                "> picoc -c                            : copyright info\n"
+#endif
                "> picoc -h                            : this help message\n");
         return 0;
     }
 
+#if defined(INCLUDE_LICENSE)
     if (strcmp(argv[ParamCount], "-c") == 0) {
         printf("%s\n", (char*)&__LICENSE);
         return 0;
     }
+#endif
 
     PicocInitialize(&pc, StackSize);
 
@@ -68,4 +73,3 @@ int main(int argc, char **argv)
     PicocCleanup(&pc);
     return pc.PicocExitValue;
 }
-#endif

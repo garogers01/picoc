@@ -1,4 +1,5 @@
 /*  */
+#ifndef NO_STDIO
 #include <stdio.h>
 #include <errno.h>
 
@@ -854,3 +855,4 @@ void PrintFP(double Num, FILE *Stream)
     fprintf(Stream, "%f", Num);
 }
 
+#endif

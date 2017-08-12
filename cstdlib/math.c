@@ -1,4 +1,5 @@
 /*  */
+#ifndef NO_FP
 #include <math.h>
 
 #include "../interpreter.h"
@@ -218,3 +219,4 @@ void MathSetupFunc(Picoc *pc)
     VariableDefinePlatformVar(pc, NULL, "M_SQRT1_2", &pc->FPType,
         (union AnyValue*)&M_SQRT1_2Value, false);
 }
+#endif
