@@ -1,9 +1,9 @@
 /* picoc main program - this varies depending on your operating system and
  * how you're using picoc */
 /* platform-dependent code for running programs is in this file */
-#include <platform.h>
+#include "system.h"
 
-#if defined(USE_STDIO) && !defined(NO_STDIO)
+#if defined(USE_STDIO)
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

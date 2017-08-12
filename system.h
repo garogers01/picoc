@@ -22,6 +22,10 @@
 #define NO_MATH
 #endif
 
+#ifdef NO_STDIO
+#undef USE_STDIO
+#endif
+
 /* undocumented, but probably useful */
 #undef DEBUG_HEAP
 #undef DEBUG_EXPRESSIONS

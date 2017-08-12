@@ -8,10 +8,12 @@
 static void PrintSourceTextErrorLine(IOFILE *Stream, const char *FileName,
         const char *SourceText, int Line, int CharacterPos);
 
+#ifdef USE_STDIO
 #ifdef DEBUGGER
 static int gEnableDebugger = true;
 #else
 static int gEnableDebugger = false;
+#endif
 #endif
 
 
