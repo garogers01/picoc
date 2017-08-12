@@ -169,8 +169,6 @@ The host.mk files can define:
  - TARGET - the executable file to be buile, or firmware image for
    embedded systems. This one is required.
  - CC - the C compiler to use if not the build hosts CC.
- - STDLIB - Libraries to include from the cstdlib directory. If not
-   defined, you get all of them. $(EMBEDDED) excludes the POSIX libraries.
  - SRCS - source-specifc host files other than library.c and platform.c
  - LIBS - Extra libraries to link against.
  - CFLAGS & LDFLAGS  - flags to be added when compiling and linking.
@@ -191,10 +189,9 @@ In addtions, if you have NO_STDIO defined, you'll need to define
 PrintCh(char, IOFILE *), PrintStr(char *, IOFILE *),
 PrintSimpleInt(long Num, IOFILE *), and BasicIOInit(Picoc *).
 
-
 platform.h has platform-specific includes, and defines to enable
 features. In particular, critical libraries in cstdlib can be disabled
-by defining NO_XXXX for library XXX. NO_FP will build an interpreter
+by defining NO_XXX for library XXX. NO_FP will build an interpreter
 with no floating point types, and implies NO_MATH. If you define
 USE_STDIO (and haven't defined NO_STDIO), you'll get a default main
 function suitable for use with a command line. If you don't use that,
@@ -318,7 +315,7 @@ If you're defining library functions which take structures as parameters you'll
 have to do a little more work. You need to pre-define the structure so the
 function prototype can refer to it.
 
-In library_XXX.c you'll find a function called PlatformLibraryInit(). This is
+In XXX/library.c you'll find a function called PlatformLibraryInit(). This is
 called before the library prototypes are defined. Here's a quick way to define
 a complex number structure as if it was defined in an include file:
 
