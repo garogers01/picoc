@@ -8,18 +8,18 @@
 #define MAX_FORMAT (80)
 #define MAX_SCANF_ARGS (10)
 
-static int Stdio_ZeroValue = 0;
-static int EOFValue = EOF;
-static int SEEK_SETValue = SEEK_SET;
-static int SEEK_CURValue = SEEK_CUR;
-static int SEEK_ENDValue = SEEK_END;
-static int BUFSIZValue = BUFSIZ;
-static int FILENAME_MAXValue = FILENAME_MAX;
-static int _IOFBFValue = _IOFBF;
-static int _IOLBFValue = _IOLBF;
-static int _IONBFValue = _IONBF;
+static const int Stdio_ZeroValue = 0;
+static const int EOFValue = EOF;
+static const int SEEK_SETValue = SEEK_SET;
+static const int SEEK_CURValue = SEEK_CUR;
+static const int SEEK_ENDValue = SEEK_END;
+static const int BUFSIZValue = BUFSIZ;
+static const int FILENAME_MAXValue = FILENAME_MAX;
+static const int _IOFBFValue = _IOFBF;
+static const int _IOLBFValue = _IOLBF;
+static const int _IONBFValue = _IONBF;
 static int L_tmpnamValue = L_tmpnam;
-static int GETS_MAXValue = 255;  /* arbitrary maximum size of a gets() file */
+static const int GETS_MAXValue = 255;  /* arbitrary maximum size of a gets() file */
 
 static FILE *stdinValue;
 static FILE *stdoutValue;

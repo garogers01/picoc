@@ -5,14 +5,14 @@
 #include "../interpreter.h"
 
 
-static int CLOCKS_PER_SECValue = CLOCKS_PER_SEC;
+static const int CLOCKS_PER_SECValue = CLOCKS_PER_SEC;
 
 #ifdef CLK_PER_SEC
-static int CLK_PER_SECValue = CLK_PER_SEC;
+static const int CLK_PER_SECValue = CLK_PER_SEC;
 #endif
 
 #ifdef CLK_TCK
-static int CLK_TCKValue = CLK_TCK;
+static const int CLK_TCKValue = CLK_TCK;
 #endif
 
 void StdAsctime(struct ParseState *Parser, struct Value *ReturnValue,

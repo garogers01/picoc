@@ -484,6 +484,7 @@ void UnistdWrite(struct ParseState *Parser, struct Value *ReturnValue,
 
 /* handy structure definitions */
 const char UnistdDefs[] = "\
+#include <stdint.h>\
 typedef int uid_t; \
 typedef int gid_t; \
 typedef int pid_t; \
@@ -491,7 +492,6 @@ typedef int off_t; \
 typedef int size_t; \
 typedef int ssize_t; \
 typedef int useconds_t;\
-typedef int intptr_t;\
 ";
 
 /* all unistd.h functions */

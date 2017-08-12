@@ -7,13 +7,14 @@ include $(HOST_DIR)/host.mk
 # -std=gnu11
 CFLAGS+=-Wall -g -std=gnu11 -pedantic -D$(HOST)_HOST -I$(HOST_DIR) -DVER=\"`git show-ref --abbrev=8 --head --hash head`\" -DTAG=\"`git describe --abbrev=0 --tags`\"
 
-EMBEDDED = cstdlib/string.c cstdlib/stdlib.c cstdlib/errno.c cstdlib/ctype.c cstdlib/stdbool.c
-STDLIB ?= cstdlib/stdio.c cstdlib/math.c cstdlib/string.c cstdlib/stdlib.c \
-	cstdlib/time.c cstdlib/errno.c cstdlib/ctype.c cstdlib/stdbool.c
+STDLIB ?= 
 
 
 SRCS	+= picoc.c table.c lex.c parse.c expression.c heap.c type.c \
-	variable.c clibrary.c platform.c include.c debug.c $(STDLIB) \
+	variable.c clibrary.c platform.c include.c debug.c \
+	cstdlib/stdio.c cstdlib/math.c cstdlib/string.c cstdlib/stdlib.c \
+	cstdlib/time.c cstdlib/errno.c cstdlib/ctype.c cstdlib/stdbool.c \
+	cstdlib/stdint.c \
 	$(HOST_DIR)/platform.c $(HOST_DIR)/library.c
 OBJS	:= $(SRCS:%.c=%.o)
 

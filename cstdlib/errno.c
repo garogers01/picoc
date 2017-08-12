@@ -5,323 +5,323 @@
 
 
 #ifdef EACCES
-static int EACCESValue = EACCES;
+static const int EACCESValue = EACCES;
 #endif
 
 #ifdef EADDRINUSE
-static int EADDRINUSEValue = EADDRINUSE;
+static const int EADDRINUSEValue = EADDRINUSE;
 #endif
 
 #ifdef EADDRNOTAVAIL
-static int EADDRNOTAVAILValue = EADDRNOTAVAIL;
+static const int EADDRNOTAVAILValue = EADDRNOTAVAIL;
 #endif
 
 #ifdef EAFNOSUPPORT
-static int EAFNOSUPPORTValue = EAFNOSUPPORT;
+static const int EAFNOSUPPORTValue = EAFNOSUPPORT;
 #endif
 
 #ifdef EAGAIN
-static int EAGAINValue = EAGAIN;
+static const int EAGAINValue = EAGAIN;
 #endif
 
 #ifdef EALREADY
-static int EALREADYValue = EALREADY;
+static const int EALREADYValue = EALREADY;
 #endif
 
 #ifdef EBADF
-static int EBADFValue = EBADF;
+static const int EBADFValue = EBADF;
 #endif
 
 #ifdef EBADMSG
-static int EBADMSGValue = EBADMSG;
+static const int EBADMSGValue = EBADMSG;
 #endif
 
 #ifdef EBUSY
-static int EBUSYValue = EBUSY;
+static const int EBUSYValue = EBUSY;
 #endif
 
 #ifdef ECANCELED
-static int ECANCELEDValue = ECANCELED;
+static const int ECANCELEDValue = ECANCELED;
 #endif
 
 #ifdef ECHILD
-static int ECHILDValue = ECHILD;
+static const int ECHILDValue = ECHILD;
 #endif
 
 #ifdef ECONNABORTED
-static int ECONNABORTEDValue = ECONNABORTED;
+static const int ECONNABORTEDValue = ECONNABORTED;
 #endif
 
 #ifdef ECONNREFUSED
-static int ECONNREFUSEDValue = ECONNREFUSED;
+static const int ECONNREFUSEDValue = ECONNREFUSED;
 #endif
 
 #ifdef ECONNRESET
-static int ECONNRESETValue = ECONNRESET;
+static const int ECONNRESETValue = ECONNRESET;
 #endif
 
 #ifdef EDEADLK
-static int EDEADLKValue = EDEADLK;
+static const int EDEADLKValue = EDEADLK;
 #endif
 
 #ifdef EDESTADDRREQ
-static int EDESTADDRREQValue = EDESTADDRREQ;
+static const int EDESTADDRREQValue = EDESTADDRREQ;
 #endif
 
 #ifdef EDOM
-static int EDOMValue = EDOM;
+static const int EDOMValue = EDOM;
 #endif
 
 #ifdef EDQUOT
-static int EDQUOTValue = EDQUOT;
+static const int EDQUOTValue = EDQUOT;
 #endif
 
 #ifdef EEXIST
-static int EEXISTValue = EEXIST;
+static const int EEXISTValue = EEXIST;
 #endif
 
 #ifdef EFAULT
-static int EFAULTValue = EFAULT;
+static const int EFAULTValue = EFAULT;
 #endif
 
 #ifdef EFBIG
-static int EFBIGValue = EFBIG;
+static const int EFBIGValue = EFBIG;
 #endif
 
 #ifdef EHOSTUNREACH
-static int EHOSTUNREACHValue = EHOSTUNREACH;
+static const int EHOSTUNREACHValue = EHOSTUNREACH;
 #endif
 
 #ifdef EIDRM
-static int EIDRMValue = EIDRM;
+static const int EIDRMValue = EIDRM;
 #endif
 
 #ifdef EILSEQ
-static int EILSEQValue = EILSEQ;
+static const int EILSEQValue = EILSEQ;
 #endif
 
 #ifdef EINPROGRESS
-static int EINPROGRESSValue = EINPROGRESS;
+static const int EINPROGRESSValue = EINPROGRESS;
 #endif
 
 #ifdef EINTR
-static int EINTRValue = EINTR;
+static const int EINTRValue = EINTR;
 #endif
 
 #ifdef EINVAL
-static int EINVALValue = EINVAL;
+static const int EINVALValue = EINVAL;
 #endif
 
 #ifdef EIO
-static int EIOValue = EIO;
+static const int EIOValue = EIO;
 #endif
 
 #ifdef EISCONN
-static int EISCONNValue = EISCONN;
+static const int EISCONNValue = EISCONN;
 #endif
 
 #ifdef EISDIR
-static int EISDIRValue = EISDIR;
+static const int EISDIRValue = EISDIR;
 #endif
 
 #ifdef ELOOP
-static int ELOOPValue = ELOOP;
+static const int ELOOPValue = ELOOP;
 #endif
 
 #ifdef EMFILE
-static int EMFILEValue = EMFILE;
+static const int EMFILEValue = EMFILE;
 #endif
 
 #ifdef EMLINK
-static int EMLINKValue = EMLINK;
+static const int EMLINKValue = EMLINK;
 #endif
 
 #ifdef EMSGSIZE
-static int EMSGSIZEValue = EMSGSIZE;
+static const int EMSGSIZEValue = EMSGSIZE;
 #endif
 
 #ifdef EMULTIHOP
-static int EMULTIHOPValue = EMULTIHOP;
+static const int EMULTIHOPValue = EMULTIHOP;
 #endif
 
 #ifdef ENAMETOOLONG
-static int ENAMETOOLONGValue = ENAMETOOLONG;
+static const int ENAMETOOLONGValue = ENAMETOOLONG;
 #endif
 
 #ifdef ENETDOWN
-static int ENETDOWNValue = ENETDOWN;
+static const int ENETDOWNValue = ENETDOWN;
 #endif
 
 #ifdef ENETRESET
-static int ENETRESETValue = ENETRESET;
+static const int ENETRESETValue = ENETRESET;
 #endif
 
 #ifdef ENETUNREACH
-static int ENETUNREACHValue = ENETUNREACH;
+static const int ENETUNREACHValue = ENETUNREACH;
 #endif
 
 #ifdef ENFILE
-static int ENFILEValue = ENFILE;
+static const int ENFILEValue = ENFILE;
 #endif
 
 #ifdef ENOBUFS
-static int ENOBUFSValue = ENOBUFS;
+static const int ENOBUFSValue = ENOBUFS;
 #endif
 
 #ifdef ENODATA
-static int ENODATAValue = ENODATA;
+static const int ENODATAValue = ENODATA;
 #endif
 
 #ifdef ENODEV
-static int ENODEVValue = ENODEV;
+static const int ENODEVValue = ENODEV;
 #endif
 
 #ifdef ENOENT
-static int ENOENTValue = ENOENT;
+static const int ENOENTValue = ENOENT;
 #endif
 
 #ifdef ENOEXEC
-static int ENOEXECValue = ENOEXEC;
+static const int ENOEXECValue = ENOEXEC;
 #endif
 
 #ifdef ENOLCK
-static int ENOLCKValue = ENOLCK;
+static const int ENOLCKValue = ENOLCK;
 #endif
 
 #ifdef ENOLINK
-static int ENOLINKValue = ENOLINK;
+static const int ENOLINKValue = ENOLINK;
 #endif
 
 #ifdef ENOMEM
-static int ENOMEMValue = ENOMEM;
+static const int ENOMEMValue = ENOMEM;
 #endif
 
 #ifdef ENOMSG
-static int ENOMSGValue = ENOMSG;
+static const int ENOMSGValue = ENOMSG;
 #endif
 
 #ifdef ENOPROTOOPT
-static int ENOPROTOOPTValue = ENOPROTOOPT;
+static const int ENOPROTOOPTValue = ENOPROTOOPT;
 #endif
 
 #ifdef ENOSPC
-static int ENOSPCValue = ENOSPC;
+static const int ENOSPCValue = ENOSPC;
 #endif
 
 #ifdef ENOSR
-static int ENOSRValue = ENOSR;
+static const int ENOSRValue = ENOSR;
 #endif
 
 #ifdef ENOSTR
-static int ENOSTRValue = ENOSTR;
+static const int ENOSTRValue = ENOSTR;
 #endif
 
 #ifdef ENOSYS
-static int ENOSYSValue = ENOSYS;
+static const int ENOSYSValue = ENOSYS;
 #endif
 
 #ifdef ENOTCONN
-static int ENOTCONNValue = ENOTCONN;
+static const int ENOTCONNValue = ENOTCONN;
 #endif
 
 #ifdef ENOTDIR
-static int ENOTDIRValue = ENOTDIR;
+static const int ENOTDIRValue = ENOTDIR;
 #endif
 
 #ifdef ENOTEMPTY
-static int ENOTEMPTYValue = ENOTEMPTY;
+static const int ENOTEMPTYValue = ENOTEMPTY;
 #endif
 
 #ifdef ENOTRECOVERABLE
-static int ENOTRECOVERABLEValue = ENOTRECOVERABLE;
+static const int ENOTRECOVERABLEValue = ENOTRECOVERABLE;
 #endif
 
 #ifdef ENOTSOCK
-static int ENOTSOCKValue = ENOTSOCK;
+static const int ENOTSOCKValue = ENOTSOCK;
 #endif
 
 #ifdef ENOTSUP
-static int ENOTSUPValue = ENOTSUP;
+static const int ENOTSUPValue = ENOTSUP;
 #endif
 
 #ifdef ENOTTY
-static int ENOTTYValue = ENOTTY;
+static const int ENOTTYValue = ENOTTY;
 #endif
 
 #ifdef ENXIO
-static int ENXIOValue = ENXIO;
+static const int ENXIOValue = ENXIO;
 #endif
 
 #ifdef EOPNOTSUPP
-static int EOPNOTSUPPValue = EOPNOTSUPP;
+static const int EOPNOTSUPPValue = EOPNOTSUPP;
 #endif
 
 #ifdef EOVERFLOW
-static int EOVERFLOWValue = EOVERFLOW;
+static const int EOVERFLOWValue = EOVERFLOW;
 #endif
 
 #ifdef EOWNERDEAD
-static int EOWNERDEADValue = EOWNERDEAD;
+static const int EOWNERDEADValue = EOWNERDEAD;
 #endif
 
 #ifdef EPERM
-static int EPERMValue = EPERM;
+static const int EPERMValue = EPERM;
 #endif
 
 #ifdef EPIPE
-static int EPIPEValue = EPIPE;
+static const int EPIPEValue = EPIPE;
 #endif
 
 #ifdef EPROTO
-static int EPROTOValue = EPROTO;
+static const int EPROTOValue = EPROTO;
 #endif
 
 #ifdef EPROTONOSUPPORT
-static int EPROTONOSUPPORTValue = EPROTONOSUPPORT;
+static const int EPROTONOSUPPORTValue = EPROTONOSUPPORT;
 #endif
 
 #ifdef EPROTOTYPE
-static int EPROTOTYPEValue = EPROTOTYPE;
+static const int EPROTOTYPEValue = EPROTOTYPE;
 #endif
 
 #ifdef ERANGE
-static int ERANGEValue = ERANGE;
+static const int ERANGEValue = ERANGE;
 #endif
 
 #ifdef EROFS
-static int EROFSValue = EROFS;
+static const int EROFSValue = EROFS;
 #endif
 
 #ifdef ESPIPE
-static int ESPIPEValue = ESPIPE;
+static const int ESPIPEValue = ESPIPE;
 #endif
 
 #ifdef ESRCH
-static int ESRCHValue = ESRCH;
+static const int ESRCHValue = ESRCH;
 #endif
 
 #ifdef ESTALE
-static int ESTALEValue = ESTALE;
+static const int ESTALEValue = ESTALE;
 #endif
 
 #ifdef ETIME
-static int ETIMEValue = ETIME;
+static const int ETIMEValue = ETIME;
 #endif
 
 #ifdef ETIMEDOUT
-static int ETIMEDOUTValue = ETIMEDOUT;
+static const int ETIMEDOUTValue = ETIMEDOUT;
 #endif
 
 #ifdef ETXTBSY
-static int ETXTBSYValue = ETXTBSY;
+static const int ETXTBSYValue = ETXTBSY;
 #endif
 
 #ifdef EWOULDBLOCK
-static int EWOULDBLOCKValue = EWOULDBLOCK;
+static const int EWOULDBLOCKValue = EWOULDBLOCK;
 #endif
 
 #ifdef EXDEV
-static int EXDEVValue = EXDEV;
+static const int EXDEVValue = EXDEV;
 #endif
 
 

@@ -4,7 +4,7 @@
 #include "../interpreter.h"
 
 
-static int String_ZeroValue = 0;
+static const int String_ZeroValue = 0;
 
 void StringStrcpy(struct ParseState *Parser, struct Value *ReturnValue,
     struct Value **Param, int NumArgs)

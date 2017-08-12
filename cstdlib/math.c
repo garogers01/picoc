@@ -5,19 +5,19 @@
 #include "../interpreter.h"
 
 
-static double M_EValue = 2.7182818284590452354;   /* e */
-static double M_LOG2EValue = 1.4426950408889634074;   /* log_2 e */
-static double M_LOG10EValue = 0.43429448190325182765;  /* log_10 e */
-static double M_LN2Value = 0.69314718055994530942;  /* log_e 2 */
-static double M_LN10Value = 2.30258509299404568402;  /* log_e 10 */
-static double M_PIValue = 3.14159265358979323846;  /* pi */
-static double M_PI_2Value = 1.57079632679489661923;  /* pi/2 */
-static double M_PI_4Value = 0.78539816339744830962;  /* pi/4 */
-static double M_1_PIValue = 0.31830988618379067154;  /* 1/pi */
-static double M_2_PIValue = 0.63661977236758134308;  /* 2/pi */
-static double M_2_SQRTPIValue = 1.12837916709551257390;  /* 2/sqrt(pi) */
-static double M_SQRT2Value = 1.41421356237309504880;  /* sqrt(2) */
-static double M_SQRT1_2Value =  0.70710678118654752440;  /* 1/sqrt(2) */
+static const double M_EValue = 2.7182818284590452354;   /* e */
+static const double M_LOG2EValue = 1.4426950408889634074;   /* log_2 e */
+static const double M_LOG10EValue = 0.43429448190325182765;  /* log_10 e */
+static const double M_LN2Value = 0.69314718055994530942;  /* log_e 2 */
+static const double M_LN10Value = 2.30258509299404568402;  /* log_e 10 */
+static const double M_PIValue = 3.14159265358979323846;  /* pi */
+static const double M_PI_2Value = 1.57079632679489661923;  /* pi/2 */
+static const double M_PI_4Value = 0.78539816339744830962;  /* pi/4 */
+static const double M_1_PIValue = 0.31830988618379067154;  /* 1/pi */
+static const double M_2_PIValue = 0.63661977236758134308;  /* 2/pi */
+static const double M_2_SQRTPIValue = 1.12837916709551257390;  /* 2/sqrt(pi) */
+static const double M_SQRT2Value = 1.41421356237309504880;  /* sqrt(2) */
+static const double M_SQRT1_2Value =  0.70710678118654752440;  /* 1/sqrt(2) */
 
 
 void MathSin(struct ParseState *Parser, struct Value *ReturnValue,

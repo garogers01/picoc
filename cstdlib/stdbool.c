@@ -4,8 +4,8 @@
 #include "../interpreter.h"
 
 
-static int trueValue = 1;
-static int falseValue = 0;
+static const int trueValue = 1;
+static const int falseValue = 0;
 
 
 /* structure definitions */

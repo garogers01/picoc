@@ -4,7 +4,7 @@
 #include "../interpreter.h"
 
 
-static int Stdlib_ZeroValue = 0;
+static const int Stdlib_ZeroValue = 0;
 
 
 void StdlibAtof(struct ParseState *Parser, struct Value *ReturnValue,
