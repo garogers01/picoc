@@ -1,4 +1,6 @@
 /*  */
+#include "platform.h"
+
 #ifndef NO_TIME
 #include <time.h>
 

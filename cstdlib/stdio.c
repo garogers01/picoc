@@ -1,4 +1,6 @@
 /*  */
+#include "platform.h"
+
 #ifndef NO_STDIO
 #include <stdio.h>
 #include <errno.h>
