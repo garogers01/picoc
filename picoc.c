@@ -1,11 +1,12 @@
 /* picoc main program - this varies depending on your operating system and
  * how you're using picoc */
 /* platform-dependent code for running programs is in this file */
-#if defined(USE_STDIO)
+#include <platform.h>
+
+#if defined(USE_STDIO) && !defined(NO_STDIO)
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#endif
 
 /* include only picoc.h here - should be able to use it with only the
     external interfaces, no internals from interpreter.h */
@@ -73,3 +74,5 @@ int main(int argc, char **argv)
     PicocCleanup(&pc);
     return pc.PicocExitValue;
 }
+
+#endif

@@ -17,6 +17,11 @@
 /* Get host specific includes */
 #include "platform.h"
 
+#ifdef NO_FP
+#undef NO_MATH
+#define NO_MATH
+#endif
+
 /* undocumented, but probably useful */
 #undef DEBUG_HEAP
 #undef DEBUG_EXPRESSIONS

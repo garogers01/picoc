@@ -50,8 +50,7 @@ void PicocCleanup(Picoc *pc)
     PlatformCleanup(pc);
 }
 
-/* platform-dependent code for running programs */
-#if defined(UNIX_HOST) || defined(WIN32)
+#ifdef USE_STDIO
 
 #define CALL_MAIN_NO_ARGS_RETURN_VOID "main();"
 #define CALL_MAIN_WITH_ARGS_RETURN_VOID "main(__argc,__argv);"
@@ -237,9 +236,11 @@ void PlatformVPrintf(IOFILE *Stream, const char *Format, va_list Args)
             case 't':
                 PrintType(va_arg(Args, struct ValueType*), Stream);
                 break;
+#ifndef NO_FP
             case 'f':
                 PrintFP(va_arg(Args, double), Stream);
                 break;
+#endif
             case '%':
                 PrintCh('%', Stream);
                 break;

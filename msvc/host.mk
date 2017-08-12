@@ -1,2 +1,2 @@
 TARGET = picoc.exe
-LIBS=-lm -lreadline
+LIBS=-lm

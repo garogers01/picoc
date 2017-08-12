@@ -6,7 +6,6 @@
 #include <unistd.h>
 
 #define USE_STDIO	     // For interpreter I/O
-
 #define USE_READLINE
 #define INCLUDE_LICENSE  // For -c option
 

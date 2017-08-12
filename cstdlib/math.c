@@ -1,5 +1,5 @@
 /*  */
-#ifndef NO_FP
+#ifndef NO_MATH
 #include <math.h>
 
 #include "../interpreter.h"

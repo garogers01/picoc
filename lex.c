@@ -152,8 +152,11 @@ enum LexToken LexGetNumber(Picoc *pc, struct LexState *Lexer, struct Value *Valu
     long Result = 0;
     long Base = 10;
     enum LexToken ResultToken;
+#ifndef NO_FP
     double FPResult;
     double FPDiv;
+#endif
+
     /* long/unsigned flags */
 #if 0 /* unused for now */
     char IsLong = 0;
@@ -195,6 +198,9 @@ enum LexToken LexGetNumber(Picoc *pc, struct LexState *Lexer, struct Value *Valu
     if (Lexer->Pos == Lexer->End)
         return ResultToken;
 
+#ifdef NO_FP
+    return ResultToken;
+#else
     if (Lexer->Pos == Lexer->End) {
         return ResultToken;
     }
@@ -238,6 +244,7 @@ enum LexToken LexGetNumber(Picoc *pc, struct LexState *Lexer, struct Value *Valu
         LEXER_INC(Lexer);
 
     return TokenFPConstant;
+#endif
 }
 
 /* get a reserved word or identifier - used while scanning */

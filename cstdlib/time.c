@@ -1,4 +1,5 @@
 /*  */
+#ifndef NO_TIME
 #include <time.h>
 
 #include "../interpreter.h"
@@ -141,3 +142,4 @@ void StdTimeSetupFunc(Picoc *pc)
 #endif
 }
 
+#endif
