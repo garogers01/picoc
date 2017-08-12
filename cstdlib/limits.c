@@ -15,8 +15,8 @@ static const int SCHAR_MINValue = SCHAR_MIN;
 static const int SCHAR_MAXValue = SCHAR_MAX;
 #endif
 
-#ifdef UCHARM_MAX
-static const int UCHARM_MAXValue = UCHARM_MAX;
+#ifdef UCHAR_MAX
+static const int UCHAR_MAXValue = UCHAR_MAX;
 #endif
 
 #ifdef CHAR_MIN
@@ -84,9 +84,9 @@ void StdLimitsSetupFunc(Picoc *pc) {
                                (union AnyValue *) &SCHAR_MAXValue, false);
 #endif
 
-#ifdef UCHARM_MAX
+#ifdef UCHAR_MAX
      VariableDefinePlatformVar(pc, NULL, "UCHAR_MAX", &pc->IntType,
-                               (union AnyValue *) &UCHARM_MAXValue, false);
+                               (union AnyValue *) &UCHAR_MAXValue, false);
 #endif
 
 #ifdef CHAR_MIN

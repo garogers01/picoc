@@ -20,7 +20,7 @@ void IncludeInit(Picoc *pc)
 # endif
     IncludeRegister(pc, "stdlib.h", &StdlibSetupFunc, &StdlibFunctions[0], NULL);
     IncludeRegister(pc, "string.h", &StringSetupFunc, &StringFunctions[0], NULL);
-    IncludeRegister(pc, "stdint.h", &StdintSetupFunc, NULL, StdintDefs);
+    IncludeRegister(pc, "stdint.h", &StdintSetupFunc, NULL, NULL);
 # ifndef NO_TIME
     IncludeRegister(pc, "time.h", &StdTimeSetupFunc, &StdTimeFunctions[0], StdTimeDefs);
 # endif

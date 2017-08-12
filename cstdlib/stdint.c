@@ -2,113 +2,97 @@
 
 #include <limits.h>
 #include <stdint.h>
+#include <ctype.h>
 
 #include "../interpreter.h"
 #include "../picoc.h"
 
-/* INT8_MIN */
-/* INT8_MAX */
-/* INT_FAST8_MIN */
-/* INT_FAST8_MAX */
-/* INT_LEAST8_MIN */
-/* INT_LEAST8_MAX */
-/* UINT8_MIN */
-/* UINT8_MAX */
-/* UINT_FAST8_MIN */
-/* UINT_FAST8_MAX */
-/* UINT_LEAST8_MIN */
-/* UINT_LEAST8_MAX */
-/* INT16_MIN */
-/* INT16_MAX */
-/* INT_FAST16_MIN */
-/* INT_FAST16_MAX */
-/* INT_LEAST16_MIN */
-/* INT_LEAST16_MAX */
-/* UINT16_MIN */
-/* UINT16_MAX */
-/* UINT_FAST16_MIN */
-/* UINT_FAST16_MAX */
-/* UINT_LEAST16_MIN */
-/* UINT_LEAST16_MAX */
-/* INT32_MIN */
-/* INT32_MAX */
-/* INT_FAST32_MIN */
-/* INT_FAST32_MAX */
-/* INT_LEAST32_MIN */
-/* INT_LEAST32_MAX */
-/* UINT32_MIN */
-/* UINT32_MAX */
-/* UINT_FAST32_MIN */
-/* UINT_FAST32_MAX */
-/* UINT_LEAST32_MIN */
-/* UINT_LEAST32_MAX */
-/* INT64_MIN */
-/* INT64_MAX */
-/* INT_FAST64_MIN */
-/* INT_FAST64_MAX */
-/* INT_LEAST64_MIN */
-/* INT_LEAST64_MAX */
-/* UINT64_MIN */
-/* UINT64_MAX */
-/* UINT_FAST64_MIN */
-/* UINT_FAST64_MAX */
-/* UINT_LEAST64_MIN */
-/* UINT_LEAST64_MAX */
+/*
+ * Using limits.h here is buggy. A user could include stdint.h then redefine
+ * a name in limits.h that stdint.h is using, and get the wrong value. But
+ * doing it right would require having two copies of everything. A minor
+ * issue in a compiler, but not so much in an interpreter.
+ */
+static const char StaticDefs[] = "\
+#include <limits.h>\n\
+typedef long intmax_t;\n\
+#define INTMAX_MIN LONG_MIN\n\
+#define INTMAX_MAX LONG_MAX\n\
+#define INTMAX_C(c) c ## L\n\
+typedef unsigned long uintmax_t;\n\
+#define UINTMAX_MAX LONG_MAX\n\
+#define UINTMAX_C(c) c ## UL\n\
+";
 
+static const char format[] = "\
+typedef signed %s int%s%d_t;\n\
+#define INT%s%d_MIN %s_MIN\n\
+#define INT%s%d_MAX %s_MAX\n\
+typedef unsigned %s uint%s%d_t;\n\
+#define UINT%s%d_MAX U%s_MAX\n\
+";
 
-const char *fn = "stdint.h";
-#define LEN 40
-static void make_types(Picoc *pc, const char *type, int length, bool exact) {
-     char buffer[LEN];
+static const char fn[] = "stdint.h";
+#define LEN 2400
+
+static void make_types(char *buffer, const char *type, int length, bool exact) {
+     int i;
+     char upper[10];	// Long Long some day?
+
+     if (strcmp(type, "short") == 0) {
+          strcpy(upper, "SHRT");
+     } else {
+          for (i = 0; type[i]; i += 1)
+               upper[i] = toupper(type[i]);
+          upper[i] = '\0';
+     }
 
      if (exact) {
-          snprintf(buffer, LEN, "typedef signed %s int%d_t;", type, length);
-          PicocParse(pc, fn, buffer, strlen(buffer), true, false, false, false); 
-          snprintf(buffer, LEN, "typedef unsigned %s uint%d_t;", type, length);
-          PicocParse(pc, fn, buffer, strlen(buffer), true, false, false, false); 
+          snprintf(buffer + strlen(buffer), LEN - strlen(buffer), format,
+                   type, "", length, "", length, upper, "", length, upper,
+                   type, "", length, "", length, upper);
      }
-     snprintf(buffer, LEN, "typedef signed %s int_fast%d_t;", type, length);
-     PicocParse(pc, fn, buffer, strlen(buffer), true, false, false, false); 
-     snprintf(buffer, LEN, "typedef unsigned %s uint_fast%d_t;", type, length);
-     PicocParse(pc, fn, buffer, strlen(buffer), true, false, false, false); 
-     snprintf(buffer, LEN, "typedef signed %s int_least%d_t;", type, length);
-     PicocParse(pc, fn, buffer, strlen(buffer), true, false, false, false); 
-     snprintf(buffer, LEN, "typedef unsigned %s uint_least%d_t;", type, length);
-     PicocParse(pc, fn, buffer, strlen(buffer), true, false, false, false); 
+     snprintf(buffer + strlen(buffer), LEN - strlen(buffer), format,
+              type, "_fast", length, "_FAST", length, upper,
+              "_FAST", length, upper,
+               type, "_fast", length, "_FAST", length, upper);
+     snprintf(buffer + strlen(buffer), LEN - strlen(buffer), format,
+              type, "_least", length, "_LEAST", length, upper,
+              "_LEAST", length, upper,
+               type, "_least", length, "_LEAST", length, upper);
 }
-     
-const char StdintDefs[] = "\
-typedef long intmax_t;\
-typedef unsigned long uintmax_t;\
-";
 
 void StdintSetupFunc(Picoc *pc)
 {
      char *typptr ;
      char buffer[LEN];
 
+     strcpy(buffer, StaticDefs);
+
      /* The easy cases */
-     make_types(pc, "char", 8, CHAR_BIT == 8);
-     make_types(pc, "short", 16, sizeof(short) * CHAR_BIT == 16);
+     make_types(buffer, "char", 8, CHAR_BIT == 8);
+     make_types(buffer, "short", 16, sizeof(short) * CHAR_BIT == 16);
+
+     if (sizeof(short) * CHAR_BIT >= 32 && sizeof(int) * CHAR_BIT >= 64) {
+          make_types(buffer, "short", 32, sizeof(short) * CHAR_BIT == 32);
+          make_types(buffer, "int", 64, sizeof(int) * CHAR_BIT == 64);
+     } else {
+          if (sizeof(int) * CHAR_BIT >= 32) {
+               make_types(buffer, "int", 32, sizeof(int) * CHAR_BIT == 32);
+          } else if (sizeof(long) * CHAR_BIT >= 32) {
+               make_types(buffer, "long", 32, false);
+          }
+          if (sizeof(long) * CHAR_BIT >= 64) {
+               make_types(buffer, "long", 64, sizeof(int) * CHAR_BIT == 64);
+          }
+     }
 
      typptr = sizeof(short) >= sizeof(void *) ? "short"
            : sizeof(int) >= sizeof(void *) ? "int" : "long";
-     snprintf(buffer, LEN, "typedef %s intptr_t;", typptr);
+     snprintf(buffer + strlen(buffer), LEN - strlen(buffer),
+              "typedef %s intptr_t;\n", typptr);
+     snprintf(buffer + strlen(buffer), LEN - strlen(buffer),
+              "typedef unsigned %s uintptr_t;\n", typptr);
+
      PicocParse(pc, fn, buffer, strlen(buffer), true, false, false, false);
-     snprintf(buffer, LEN, "typedef unsigned %s uintptr_t;", typptr);
-     PicocParse(pc, fn, buffer, strlen(buffer), true, false, false, false);
-     
-     if (sizeof(short) * CHAR_BIT >= 32 && sizeof(int) * CHAR_BIT >= 64) {
-          make_types(pc, "short", 32, sizeof(short) * CHAR_BIT == 32);
-          make_types(pc, "int", 64, sizeof(int) * CHAR_BIT == 64);
-     } else {
-          if (sizeof(int) * CHAR_BIT >= 32) {
-               make_types(pc, "int", 32, sizeof(int) * CHAR_BIT == 32);
-          } else if (sizeof(long) * CHAR_BIT >= 32) {
-               make_types(pc, "long", 32, false);
-          }
-          if (sizeof(long) * CHAR_BIT >= 64) {
-               make_types(pc, "long", 64, sizeof(int) * CHAR_BIT == 64);
-          }
-     }
 }
