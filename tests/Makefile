@@ -63,6 +63,7 @@ TESTS=	00_assignment.test \
 	67_macro_crash.test \
 	68_return.test \
 	69_shebang_script.test \
+	70_integer.test
 
 include csmith/Makefile
 include jpoirier/Makefile
